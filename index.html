@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ondas — App de Música</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>" />
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">🌊 <span>Ondas</span></div>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="inicio">🏠 Início</button>
+      <button class="nav-btn" data-view="favoritos">❤️ Favoritos <span id="favCount" class="badge">0</span></button>
+      <button class="nav-btn" data-view="upload">📁 Minhas músicas</button>
+    </nav>
+    <div class="side-section">
+      <h3>Playlists</h3>
+      <div id="playlistList" class="playlists"></div>
+      <button id="newPlaylistBtn" class="ghost-btn">+ Nova playlist</button>
+    </div>
+    <div class="side-footer">
+      <p>Dica: pressione <kbd>Espaço</kbd> para pausar/tocar</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <header class="topbar">
+      <div class="search">
+        <span>🔍</span>
+        <input id="searchInput" type="search" placeholder="Buscar música, artista, gênero..." autocomplete="off" />
+      </div>
+      <label class="upload-btn" title="Enviar seus MP3s">
+        ⬆ Enviar música
+        <input id="fileInput" type="file" accept="audio/*" multiple hidden />
+      </label>
+    </header>
+
+    <section class="hero">
+      <div class="hero-art" id="heroArt">🎧</div>
+      <div>
+        <p class="eyebrow">Tocando agora</p>
+        <h1 id="heroTitle">Escolha uma música para começar</h1>
+        <p id="heroArtist" class="muted">12 faixas gratuitas incluídas • sem login</p>
+        <div class="hero-actions">
+          <button id="heroPlay" class="primary-btn">▶ Tocar</button>
+          <button id="shuffleBtn" class="ghost-btn">🔀 Aleatório</button>
+        </div>
+        <canvas id="visualizer" width="600" height="64"></canvas>
+      </div>
+    </section>
+
+    <div id="genreChips" class="chips"></div>
+
+    <section>
+      <h2 id="sectionTitle">Todas as músicas</h2>
+      <div id="trackList" class="tracks"></div>
+    </section>
+  </main>
+
+  <!-- PLAYER BAR -->
+  <footer class="player">
+    <div class="track-info">
+      <div id="coverMini" class="cover-mini">♪</div>
+      <div class="meta">
+        <strong id="pTitle">Nada tocando</strong>
+        <span id="pArtist" class="muted">—</span>
+      </div>
+      <button id="likeBtn" class="icon-btn" title="Favoritar">🤍</button>
+    </div>
+
+    <div class="controls">
+      <div class="buttons">
+        <button id="shuffleToggle" class="icon-btn" title="Aleatório">🔀</button>
+        <button id="prevBtn" class="icon-btn" title="Anterior">⏮</button>
+        <button id="playBtn" class="play-btn" title="Tocar/Pausar (Espaço)">▶</button>
+        <button id="nextBtn" class="icon-btn" title="Próxima">⏭</button>
+        <button id="repeatBtn" class="icon-btn" title="Repetir: desligado">🔁</button>
+      </div>
+      <div class="progress-row">
+        <span id="curTime">0:00</span>
+        <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Progresso" />
+        <span id="durTime">0:00</span>
+      </div>
+    </div>
+
+    <div class="volume">
+      <button id="muteBtn" class="icon-btn">🔊</button>
+      <input id="vol" type="range" min="0" max="100" value="90" aria-label="Volume" />
+      <select id="speed" title="Velocidade">
+        <option value="0.75">0.75x</option>
+        <option value="1" selected>1x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+      </select>
+    </div>
+
+    <audio id="audio" preload="metadata"></audio>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
